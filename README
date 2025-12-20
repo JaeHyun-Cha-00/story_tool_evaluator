@@ -1,0 +1,3 @@
+How to install the tool to claude-desktop
+
+fastmcp install claude-desktop server.py --with-requirements requirements.txt
