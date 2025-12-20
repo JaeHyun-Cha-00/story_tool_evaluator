@@ -11,6 +11,7 @@ class WolverineClient:
         s = WOLVERINE_SETTINGS
         self._client = OpenAI(base_url=s.base_url, api_key=s.api_key)
         self._model = s.model
+        self._temperature = s.temperature
 
     def chat(self, *, system_prompt: str, user_prompt: str) -> str:
         """Send a chat request to the model and return the text content."""
@@ -20,5 +21,6 @@ class WolverineClient:
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},
             ],
+            temperature=self._temperature,
         )
         return (completion.choices[0].message.content or "").strip()

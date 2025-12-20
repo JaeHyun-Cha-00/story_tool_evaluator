@@ -8,7 +8,8 @@ class WolverineSettings:
 
     base_url: str = "http://localhost:8000/v1"  # vLLM Server Address
     api_key: str = "EMPTY"
-    model: str = "meta-llama/Llama-3.1-8B-Instruct"  # Model Name
+    model: str = "google/gemma-3-4b-it"  # Model Name
+    temperature: float = 0.0  # Temperature for consistent, deterministic results
 
 # Single shared settings instance used across the application.
 WOLVERINE_SETTINGS = WolverineSettings()
