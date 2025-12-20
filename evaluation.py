@@ -52,7 +52,30 @@ class EvaluationResult:
     
 ##### Story Evaluator (Main) ########
 class StoryEvaluator:
-    """ Evaluate stories for mulitple literary categories. """
+    """Evaluate stories for multiple literary categories."""
+
+    def __init__(self, client: WolverineClient):
+        """Initialize the evaluator with a Wolverine client."""
+        self._client = client
+
+    def evaluate(self, story: str) -> dict[str, EvaluationResult]:
+        """Evaluate a story across all categories and return results."""
+        results = {}
+        for category in STORY_EVALUATION_CATEGORIES:
+            user_prompt = build_user_prompt(story, category)
+            response = self._client.chat(
+                system_prompt=EVALUATION_SYSTEM_PROMPT,
+                user_prompt=user_prompt,
+            )
+            score, explanation = parse_response(response)
+            if score is None:
+                score = 0.0  # Default score if parsing fails
+            results[category] = EvaluationResult(
+                category=category,
+                score=score,
+                explanation=explanation,
+            )
+        return results
 
 ###### Response Parsing ########
 def parse_response(response: str) -> tuple[float | None, str]:

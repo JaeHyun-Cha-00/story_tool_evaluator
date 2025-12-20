@@ -1,5 +1,5 @@
 from fastmcp import FastMCP
-from evaluation import StoryEvaluator
+from evaluation import StoryEvaluator, STORY_EVALUATION_CATEGORIES
 from clients import WolverineClient
 
 mcp = FastMCP(name="Story Evaluator")
@@ -10,7 +10,7 @@ evaluator = StoryEvaluator(client)
 def list_categories() -> list[str]:
     """Return all supported evaluation categories."""
     print("[INFO] Tool called: list_categories")
-    return
+    return STORY_EVALUATION_CATEGORIES
 
 @mcp.tool()
 def evaluate(story: str) -> dict[str, dict]:
