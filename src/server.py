@@ -15,7 +15,6 @@ SCRIPT_DIR = Path(__file__).parent.absolute()
 # Project root is one level up from src/
 PROJECT_ROOT = SCRIPT_DIR.parent
 
-# Dataset loading - use absolute paths based on project root
 DATASET_PATH = PROJECT_ROOT / "dataset" / "data.csv"
 RESULTS_DIR = PROJECT_ROOT / "dataset" / "results"
 _dataset = None

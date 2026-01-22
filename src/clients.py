@@ -1,5 +1,6 @@
 """Client wrapper for communicating with the Wolverine (vLLM) OpenAI-compatible API."""
 
+import sys
 from openai import OpenAI
 from config import WOLVERINE_SETTINGS
 
@@ -12,6 +13,7 @@ class WolverineClient:
         self._client = OpenAI(base_url=s.base_url, api_key=s.api_key)
         self._model = s.model
         self._temperature = s.temperature
+        self._max_tokens = s.max_tokens
 
     def chat(self, *, system_prompt: str, user_prompt: str) -> str:
         """Send a chat request to the model and return the text content."""
@@ -22,5 +24,8 @@ class WolverineClient:
                 {"role": "user", "content": user_prompt},
             ],
             temperature=self._temperature,
+            max_tokens=self._max_tokens,
         )
-        return (completion.choices[0].message.content or "").strip()
+        response = (completion.choices[0].message.content or "").strip()
+        print(f"[API] Request completed - Response length: {len(response)} chars", file=sys.stderr, flush=True)
+        return response
