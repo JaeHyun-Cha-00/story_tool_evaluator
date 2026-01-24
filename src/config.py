@@ -8,8 +8,8 @@ class WolverineSettings:
 
     base_url: str = "http://localhost:8000/v1"  # vLLM Server Address
     api_key: str = "EMPTY"
-    model: str = "Qwen/Qwen3-4B-Instruct-2507"  # Model Name
-    # meta-llama/Llama-3.1-8B-Instruct
+    model: str = "meta-llama/Llama-3.1-8B-Instruct"  # Model Name
+    # meta-llama/Llama-3.1-8B-Instruct (이거만 돌리면 됨))
     # meta-llama/Llama-3.2-3B-Instruct
     # google/gemma-3-4b-it
     # google/gemma-3-12b-it
@@ -17,7 +17,5 @@ class WolverineSettings:
     # Qwen/Qwen2.5-7B-Instruct
 
     temperature: float = 0.7
-    min_p: float = 0.1
-    # max_tokens: int = 1500 
 
 WOLVERINE_SETTINGS = WolverineSettings()
